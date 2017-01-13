@@ -33,11 +33,6 @@ class Spotify
 		return isset($this->access_token);
 	}
 
-	public function authorize()
-	{
-		return Socialite::with('spotify')->redirect();
-	}
-
 	public function getTrack(string $id)
 	{
 		$response = $this->apiClient->getTrack($id);
