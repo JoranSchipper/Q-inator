@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="links">
-                    <a href=" {{ url('/spotify/authorization/') }} ">Get Started</a>
+                    <a href=" {{ url('/spotify/authorization/') }} " class="position-ref">Get Started</a>
                 </div>
             </div>
         </div>
