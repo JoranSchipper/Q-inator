@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-	dump(Spotify::getTrack('2AShRprYgfYAroCgRyuVyw'));
+	return view('welcome');
 });
