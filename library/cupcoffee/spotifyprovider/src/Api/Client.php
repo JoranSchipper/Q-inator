@@ -5,6 +5,7 @@ namespace CupCoffee\SpotifyProvider\Api;
 use GuzzleHttp\Client as HttpClient;
 
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -13,23 +14,34 @@ class Client
 	const API_BASE_URI = "https://api.spotify.com";
 	const API_VERSION = "v1";
 
+	/**
+	 * @var HttpClient
+	 */
 	private $httpClient;
 
-	public function __construct()
-	{
-		$user = Socialite::with('spotify')->user();
+	/**
+	 * @var string
+	 */
+	private $access_token;
 
-		dump($user);
+	public function __construct(string $access_token)
+	{
+		$this->access_token = $access_token;
 
 		$this->httpClient = new HttpClient([
-			'base_uri' => self::API_BASE_URI . "/" . self::API_VERSION
+			'base_uri' => self::API_BASE_URI
 		]);
 	}
 
 	private function get(string $uri, array $parameters = [])
 	{
 		try {
+			$uri = self::API_VERSION . "$uri";
+
 			$response = $this->httpClient->get($uri, [
+				'headers' => [
+					'Authorization' => "Bearer $this->access_token"
+				],
 				'query' =>  $parameters
 			]);
 		} catch (RequestException $exception) {

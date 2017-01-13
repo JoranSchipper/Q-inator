@@ -5,6 +5,7 @@ namespace CupCoffee\SpotifyProvider;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -20,11 +21,11 @@ class ServiceProvider extends BaseServiceProvider
 			Route::get('/authorization/callback', function() {
 				$user = Socialite::with('spotify')->user();
 
-				dump($user);
+				Session::set('spotify.access_token', $user->token);
+
+				return redirect('/');
 			})->name('spotify.auth.callback');
 		});
-
-
 	}
 
 	public function register()
