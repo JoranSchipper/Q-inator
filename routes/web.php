@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function() {
-	dump(Spotify::getTrack('2AShRprYgfYAroCgRyuVyw'));
+	dump(Spotify::getTrack('2I24iuYNtqNuFD8XbNHu8Q'));
 });
