@@ -1,3 +1,8 @@
+/**
+ * Disable notifications
+ */
+process.env.DISABLE_NOTIFIER = true;
+
 const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
@@ -14,6 +19,7 @@ require('laravel-elixir-vue-2');
  */
 
 elixir((mix) => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+    mix.sass('app.scss', null, null, {
+		includePaths: "resources/assets/bower_components/foundation-sites/scss"
+	}).webpack('app.js');
 });

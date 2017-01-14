@@ -1,0 +1,22 @@
+{
+  "name": "Q-inator",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Leroy Bakker <leroy@lorey.nl>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/JoranSchipper/Q-inator",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "^6.3.0"
+  }
+}
