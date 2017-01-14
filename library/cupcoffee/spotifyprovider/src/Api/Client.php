@@ -33,21 +33,39 @@ class Client
 		]);
 	}
 
+	private function send(Request $request, $parameters)
+	{
+		$options = [
+			'headers' => [
+				'Authorization' => "Bearer $this->access_token"
+			]
+		];
+
+		if ($request->getMethod() == "POST") {
+			$options['body'] = json_encode($parameters);
+		}
+
+		if ($request->getMethod() == "GET") {
+			$options['query'] = $parameters;
+		}
+
+		return $this->httpClient->send($request, $options);
+	}
+
 	private function get(string $uri, array $parameters = [])
 	{
-		try {
-			$uri = self::API_VERSION . "$uri";
+		$response = $this->send(new Request('GET', self::API_VERSION . "$uri"), $parameters);
 
-			$response = $this->httpClient->get($uri, [
-				'headers' => [
-					'Authorization' => "Bearer $this->access_token"
-				],
-				'query' =>  $parameters
-			]);
-		} catch (RequestException $exception) {
-			echo $exception;
-			return "";
+		if ($response instanceof ResponseInterface) {
+			return $response->getBody()->getContents();
 		}
+
+		return "";
+	}
+
+	private function post(string $uri, array $parameters = [])
+	{
+		$response = $this->send(new Request('POST', self::API_VERSION . "$uri"), $parameters);
 
 		if ($response instanceof ResponseInterface) {
 			return $response->getBody()->getContents();

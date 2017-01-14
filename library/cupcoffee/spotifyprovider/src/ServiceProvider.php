@@ -15,7 +15,10 @@ class ServiceProvider extends BaseServiceProvider
 	{
 		Route::group(['prefix' => 'spotify', 'middleware' => ['web']], function() {
 			Route::get('/authorization', function() {
-				return Socialite::with('spotify')->redirect();
+				return Socialite::with('spotify')->scopes([
+					'playlist-modify-public',
+					'playlist-modify-private'
+				])->redirect();
 			})->name('spotify.auth');
 
 			Route::get('/authorization/callback', function() {
