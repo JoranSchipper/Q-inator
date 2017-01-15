@@ -19,14 +19,9 @@ Route::get('/test', function() {
 	dump(Spotify::getTrack('2I24iuYNtqNuFD8XbNHu8Q'));
 });
 
-Route::get('/track/{id}', function($id) {
-
-	$track = Spotify::getTrack($id);
-
-	return view('track', ['track' => $track]);
-});
-
 Route::group(['middleware' => CupCoffee\SpotifyProvider\Middleware\HasAuthorizedWithSpotify::class, 'prefix' => 'queue'], function() {
 	Route::get('/', 'QueueController@index');
 	Route::get('/create', 'QueueController@create');
+	
+	Route::get('/track/{id}', 'TrackController@single');
 });
