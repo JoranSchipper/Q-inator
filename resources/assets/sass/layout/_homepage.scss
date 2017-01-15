@@ -73,4 +73,9 @@ html, body {
 .m-b-md {
 	margin-bottom: 30px;
 	color: $text-color;
+
+	span {
+		display: block;
+		font-size: 20px;
+	}
 }

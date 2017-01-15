@@ -3971,5 +3971,8 @@ html, body {
 .m-b-md {
   margin-bottom: 30px;
   color: #636b6f; }
+  .m-b-md span {
+    display: block;
+    font-size: 20px; }
 
 /*# sourceMappingURL=app.css.map */
