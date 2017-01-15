@@ -6,6 +6,7 @@ namespace CupCoffee\SpotifyProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -32,6 +33,7 @@ class ServiceProvider extends BaseServiceProvider
 				$user = Socialite::with('spotify')->user();
 
 				Session::set('spotify.user', $user);
+				Session::set('spotify.auth-time', time());
 
 				if (Session::get('spotify.auth.origin')) {
 					return redirect()->to(Session::get('spotify.auth.origin'));

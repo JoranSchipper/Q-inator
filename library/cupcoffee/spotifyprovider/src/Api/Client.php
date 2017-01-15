@@ -52,35 +52,15 @@ class Client
 		return $this->httpClient->send($request, $options);
 	}
 
-	private function get(string $uri, array $parameters = [])
+	public function get(string $uri, array $parameters = [])
 	{
 		$response = $this->send(new Request('GET', self::API_VERSION . "$uri"), $parameters);
-
-		if ($response instanceof ResponseInterface) {
-			return $response->getBody()->getContents();
-		}
-
-		return "";
+		return $response->getBody()->getContents();
 	}
 
-	private function post(string $uri, array $parameters = [])
+	public function post(string $uri, array $parameters = [])
 	{
 		$response = $this->send(new Request('POST', self::API_VERSION . "$uri"), $parameters);
-
-		if ($response instanceof ResponseInterface) {
-			return $response->getBody()->getContents();
-		}
-
-		return "";
-	}
-
-	public function getTrack(string $id)
-	{
-		return $this->get(Uri::build(Uri::TRACK, $id));
-	}
-
-	public function getTracks(array $ids)
-	{
-		return $this->get(Uri::build(Uri::TRACKS), ['ids' => $ids]);
+		return $response->getBody()->getContents();
 	}
 }

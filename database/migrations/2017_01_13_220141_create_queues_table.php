@@ -16,6 +16,7 @@ class CreateQueuesTable extends Migration
         Schema::create('queues', function (Blueprint $table) {
             $table->increments('id');
             $table->string('host');
+            $table->string('playlist');
 	        $table->timestamps();
         });
     }

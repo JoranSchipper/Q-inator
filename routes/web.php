@@ -20,8 +20,8 @@ Route::get('/test', function() {
 });
 
 Route::group(['middleware' => CupCoffee\SpotifyProvider\Middleware\HasAuthorizedWithSpotify::class, 'prefix' => 'queue'], function() {
-	Route::get('/', 'QueueController@index');
-	Route::get('/create', 'QueueController@create');
-	
+	Route::get('/', 'QueueController@index')->name('queue.index');
+	Route::get('/track/add/{id}', 'QueueController@addTrack')->name('queue.track.add');
+
 	Route::get('/track/{id}', 'TrackController@single');
 });
