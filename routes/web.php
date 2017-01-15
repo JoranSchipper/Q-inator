@@ -18,3 +18,8 @@ Route::get('/', function () {
 Route::get('/test', function() {
 	dump(Spotify::getTrack('2I24iuYNtqNuFD8XbNHu8Q'));
 });
+
+Route::group(['middleware' => CupCoffee\SpotifyProvider\Middleware\HasAuthorizedWithSpotify::class, 'prefix' => 'queue'], function() {
+	Route::get('/', 'QueueController@index');
+	Route::get('/create', 'QueueController@create');
+});
