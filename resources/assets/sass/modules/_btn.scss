@@ -1,0 +1,26 @@
+.btn {
+	padding: 10px 30px;
+	text-decoration: none;
+	border-radius: 5px;
+	user-select: none;
+	outline: 0;
+
+	[class^="icon"] {
+		&::before {
+			font-size: 2em;
+			vertical-align: middle;
+		}
+	}
+
+	&--proceed {
+		background-color: $color-primary;
+		border-bottom: 2px solid darken($color-primary, 30%);
+		color: $white;
+
+		&:hover, &:active, &:visited {
+			color: $white;
+		}
+	}
+
+
+}

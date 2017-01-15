@@ -13,14 +13,16 @@ class Spotify
 {
 	private $apiClient;
 
-	private $access_token;
+	private $user;
 
 	public function __construct()
 	{
-		$this->access_token = Session::get('spotify.access_token');
+		$this->user = Session::get('spotify.user');
 
-		$this->apiClient = new Client($this->access_token);
-		$this->mapper = new Mapper();
+		if ($this->user) {
+			$this->apiClient = new Client($this->user->token);
+			$this->mapper = new Mapper();
+		}
 	}
 
 	private function map(string $json, $object)
@@ -30,7 +32,7 @@ class Spotify
 
 	public function isAuthorized()
 	{
-		return isset($this->access_token);
+		return isset($this->user);
 	}
 
 	public function getTrack(string $id)

@@ -15,7 +15,14 @@ class ServiceProvider extends BaseServiceProvider
 	{
 		Route::group(['prefix' => 'spotify', 'middleware' => ['web']], function() {
 			Route::get('/authorization', function() {
+				if (!Session::has('spotify.auth.origin')) {
+					Session::flash('spotify.auth.origin', URL::previous());
+				} else {
+					Session::reflash();
+				}
+
 				return Socialite::with('spotify')->scopes([
+					// TODO: move the scopes to a more general config
 					'playlist-modify-public',
 					'playlist-modify-private'
 				])->redirect();
@@ -24,9 +31,13 @@ class ServiceProvider extends BaseServiceProvider
 			Route::get('/authorization/callback', function() {
 				$user = Socialite::with('spotify')->user();
 
-				Session::set('spotify.access_token', $user->token);
+				Session::set('spotify.user', $user);
 
-				return redirect('/');
+				if (Session::get('spotify.auth.origin')) {
+					return redirect()->to(Session::get('spotify.auth.origin'));
+				} else {
+					return redirect('/');
+				}
 			})->name('spotify.auth.callback');
 		});
 	}
