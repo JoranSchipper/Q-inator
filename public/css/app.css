@@ -4026,6 +4026,7 @@ html, body {
     border-bottom: 2px solid #0d4c23;
     color: #fefefe; }
     .btn--proceed:hover, .btn--proceed:active, .btn--proceed:visited {
+      background-color: #30dc6c;
       color: #fefefe; }
 
 /*# sourceMappingURL=app.css.map */

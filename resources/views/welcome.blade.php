@@ -19,7 +19,7 @@
                     Q
                     <sub>-inator</sub>
                 </div>
-                <a href=" {{ url('/spotify/authorization/') }} " role="button" class="btn btn--proceed">
+                <a href=" {{ url('/queue') }} " role="button" class="btn btn--proceed">
                     <span class="icon-spotify"></span>
                     Host your own play queue
                 </a>

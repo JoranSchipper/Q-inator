@@ -18,9 +18,8 @@
 		color: $white;
 
 		&:hover, &:active, &:visited {
+			background-color: lighten($color-primary, 5%);
 			color: $white;
 		}
 	}
-
-
 }
