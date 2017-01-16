@@ -33,11 +33,11 @@ class Factory
 	public function build(Endpoint $endpoint, $class, $parameters = [])
 	{
 		if ($endpoint->isGET()) {
-			$response = $this->client->get($endpoint->uri, $parameters);
+			$response = $this->client->get($endpoint->getPath(), $parameters);
 		}
 
 		if ($endpoint->isPOST()) {
-			$response = $this->client->post($endpoint->uri, $parameters);
+			$response = $this->client->post($endpoint->getPath(), $parameters);
 		}
 
 		if (isset($response) && $response) {

@@ -6,9 +6,8 @@ namespace CupCoffee\SpotifyProvider;
 use CupCoffee\SpotifyProvider\Api\Client;
 use CupCoffee\SpotifyProvider\Api\Endpoint;
 use CupCoffee\SpotifyProvider\Api\Factory;
-use CupCoffee\SpotifyProvider\Api\Uri;
+use Exception;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Validation\UnauthorizedException;
 use Reify\Data\JsonMapper;
 use Reify\Mapper;
 use Spotify\Playlist;
@@ -61,25 +60,25 @@ class Spotify
 
 	public function getTrack(string $id)
 	{
-		$endpoint = new Endpoint(Uri::build(Uri::TRACK, $id));
+		$endpoint = new Endpoint(Endpoint::TRACK, Endpoint::GET, $id);
 		return $this->objectFactory->build($endpoint, Track::class);
 	}
 
 	public function getTracks(array $ids)
 	{
-		$endpoint = new Endpoint(Uri::TRACKS);
+		$endpoint = new Endpoint(Endpoint::TRACKS);
 		return $this->objectFactory->build($endpoint, Track::class, ['ids' => $ids]);
 	}
 
 	public function getPlaylist(string $user_id, string $id)
 	{
-		$endpoint = new Endpoint(Uri::build(Uri::PLAYLIST, $user_id, $id));
+		$endpoint = new Endpoint(Endpoint::PLAYLIST, Endpoint::GET, $user_id, $id);
 		return $this->objectFactory->build($endpoint, Playlist::class);
 	}
 
 	public function createPlaylist(string $user_id, string $name, bool $public = false, bool $collaborative = false)
 	{
-		$endpoint = new Endpoint(Uri::build(Uri::PLAYLIST_CREATE, $user_id), Endpoint::POST);
+		$endpoint = new Endpoint(Endpoint::PLAYLIST_CREATE, Endpoint::POST);
 		return $this->objectFactory->build($endpoint, Playlist::class, [
 			'name' => $name,
 			'public' => $public,
@@ -89,7 +88,7 @@ class Spotify
 
 	public function addTracksToPlaylist(string $user_id, string $playlist_id, array $tracks)
 	{
-		$uri = Uri::build(Uri::PLAYLIST_TRACKS, $user_id, $playlist_id);
-		$this->apiClient->post($uri, ['uris' => $tracks]);
+		$endpoint = new Endpoint(Endpoint::PLAYLIST_TRACKS, Endpoint::POST, $user_id, $playlist_id);
+		$this->apiClient->post($endpoint->getPath(), ['uris' => $tracks]);
 	}
 }
