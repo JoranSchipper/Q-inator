@@ -4010,21 +4010,32 @@ html, body {
     font-size: 20px; }
 
 .btn {
-  padding: 10px 30px;
+  display: block;
+  padding: 10px 20px;
   text-decoration: none;
   border-radius: 5px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  outline: 0; }
+  outline: 0;
+  font-size: 1.2em;
+  -webkit-transition: all .2s;
+  transition: all .2s; }
   .btn [class^="icon"]::before {
-    font-size: 2em;
-    vertical-align: middle; }
+    vertical-align: middle;
+    font-size: 1.5em; }
   .btn--proceed {
     background-color: #23CF5F;
     border-bottom: 2px solid #0d4c23;
     color: #fefefe; }
+    .btn--proceed [class^="icon"]::before {
+      display: inline-block;
+      -webkit-transition: all .2s;
+      transition: all .2s; }
+    .btn--proceed:hover [class^="icon"]::before {
+      -webkit-transform: scale(1.3);
+      transform: scale(1.3); }
     .btn--proceed:hover, .btn--proceed:active, .btn--proceed:visited {
       background-color: #30dc6c;
       color: #fefefe; }

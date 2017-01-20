@@ -1,14 +1,17 @@
 .btn {
-	padding: 10px 30px;
+	display: block;
+	padding: 10px 20px;
 	text-decoration: none;
 	border-radius: 5px;
 	user-select: none;
 	outline: 0;
+	font-size: 1.2em;
+	transition: all .2s;
 
 	[class^="icon"] {
 		&::before {
-			font-size: 2em;
 			vertical-align: middle;
+			font-size: 1.5em;
 		}
 	}
 
@@ -16,6 +19,17 @@
 		background-color: $color-primary;
 		border-bottom: 2px solid darken($color-primary, 30%);
 		color: $white;
+
+		[class^="icon"]::before {
+			display: inline-block;
+			transition: all .2s;
+		}
+
+		&:hover {
+			[class^="icon"]::before {
+				transform: scale(1.3);
+			}
+		}
 
 		&:hover, &:active, &:visited {
 			background-color: lighten($color-primary, 5%);

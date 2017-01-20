@@ -19,7 +19,13 @@ require('laravel-elixir-vue-2');
  */
 
 elixir((mix) => {
-    mix.sass('app.scss', null, null, {
+	mix.sass('app.scss', null, null, {
 		includePaths: "resources/assets/bower_components/foundation-sites/scss"
-	}).webpack('app.js');
+	}).webpack('app.js', '', '', {
+		resolve: {
+			alias: {
+				'vue': 'vue/dist/vue.common.js'
+			}
+		}
+	});
 });
